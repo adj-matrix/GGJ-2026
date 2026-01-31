@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://dlmjx7hrleykv"]
+
+[ext_resource type="Texture2D" uid="uid://bg3hwd0c7a2x8" path="res://assets/images/_shrine_4.jpg" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://beu7y0kylkeo" path="res://player.tscn" id="2_0xm2m"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
+distance = -239.72533
+
+[node name="Main" type="Node2D" unique_id=1407308507]
+
+[node name="Scene" type="Sprite2D" parent="." unique_id=1661119068]
+position = Vector2(576, 324)
+scale = Vector2(1.2800001, 1.2806324)
+texture = ExtResource("1_ig7tw")
+
+[node name="Player" parent="Scene" unique_id=260596206 instance=ExtResource("2_0xm2m")]
+position = Vector2(-112.5, 171.00928)
+
+[node name="Boundary" type="Node2D" parent="Scene" unique_id=2107469164]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Scene/Boundary" unique_id=2109849862]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scene/Boundary/StaticBody2D" unique_id=874277609]
+position = Vector2(-7.8124995, -7.808651)
+shape = SubResource("WorldBoundaryShape2D_0xm2m")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Scene/Boundary" unique_id=794510228]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scene/Boundary/StaticBody2D2" unique_id=407590457]
+position = Vector2(-179.68748, 113.22532)
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_0xm2m")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Scene/Boundary" unique_id=620707077]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scene/Boundary/StaticBody2D3" unique_id=689806459]
+position = Vector2(-21.874998, 21.8642)
+rotation = -3.1415925
+shape = SubResource("WorldBoundaryShape2D_0xm2m")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Scene/Boundary" unique_id=461714993]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scene/Boundary/StaticBody2D4" unique_id=1229545919]
+position = Vector2(-64.84374, 115.56791)
+rotation = -1.5707964
+shape = SubResource("WorldBoundaryShape2D_0xm2m")
