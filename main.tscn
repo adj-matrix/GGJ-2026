@@ -1,46 +1,72 @@
 [gd_scene format=3 uid="uid://dlmjx7hrleykv"]
 
-[ext_resource type="Texture2D" uid="uid://bg3hwd0c7a2x8" path="res://assets/images/_shrine_4.jpg" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://ivqtsm4g0ao" path="res://assets/images/touhou_panel.jpg" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://beu7y0kylkeo" path="res://player.tscn" id="2_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://bg3hwd0c7a2x8" path="res://assets/images/_shrine_4.jpg" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://cnpsyn777tage" path="res://boss.tscn" id="4_1bvp3"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
 distance = -239.72533
 
 [node name="Main" type="Node2D" unique_id=1407308507]
 
-[node name="Scene" type="Sprite2D" parent="." unique_id=1661119068]
-position = Vector2(576, 324)
-scale = Vector2(1.2800001, 1.2806324)
-texture = ExtResource("1_ig7tw")
+[node name="PanelUI" type="Sprite2D" parent="." unique_id=1661119068]
+modulate = Color(0.45013577, 0.45013577, 0.45013577, 1)
+position = Vector2(574.99994, 325)
+scale = Vector2(0.8593685, 0.8597929)
+texture = ExtResource("1_h2yge")
+region_enabled = true
+region_rect = Rect2(0, 0, 1372.1343, 900)
+
+[node name="Scene" type="ColorRect" parent="." unique_id=994070072]
+offset_left = 96.0
+offset_top = 14.0
+offset_right = 660.0
+offset_bottom = 632.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Scene" type="Sprite2D" parent="Scene" unique_id=721813637]
+position = Vector2(282, 310)
+scale = Vector2(1.1929727, 1.1941518)
+texture = ExtResource("2_1bvp3")
+region_enabled = true
+region_rect = Rect2(283.6784, 7.0312424, 455.62805, 495.4516)
 
 [node name="Player" parent="Scene" unique_id=260596206 instance=ExtResource("2_0xm2m")]
-position = Vector2(-112.5, 171.00928)
+position = Vector2(285, 564)
+scale = Vector2(1.2800001, 1.2806324)
 
 [node name="Boundary" type="Node2D" parent="Scene" unique_id=2107469164]
+position = Vector2(551, 304)
+scale = Vector2(1.2800001, 1.2806324)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Scene/Boundary" unique_id=2109849862]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Scene/Boundary/StaticBody2D" unique_id=874277609]
-position = Vector2(-7.8124995, -7.808651)
+position = Vector2(-318.74997, -17.179024)
 shape = SubResource("WorldBoundaryShape2D_0xm2m")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Scene/Boundary" unique_id=794510228]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Scene/Boundary/StaticBody2D2" unique_id=407590457]
-position = Vector2(-179.68748, 113.22532)
+position = Vector2(-176.56247, 59.345684)
 rotation = 1.5707964
 shape = SubResource("WorldBoundaryShape2D_0xm2m")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Scene/Boundary" unique_id=620707077]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Scene/Boundary/StaticBody2D3" unique_id=689806459]
-position = Vector2(-21.874998, 21.8642)
+position = Vector2(-242.96872, 21.083344)
 rotation = -3.1415925
 shape = SubResource("WorldBoundaryShape2D_0xm2m")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="Scene/Boundary" unique_id=461714993]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Scene/Boundary/StaticBody2D4" unique_id=1229545919]
-position = Vector2(-64.84374, 115.56791)
+position = Vector2(-241.40623, 69.49691)
 rotation = -1.5707964
 shape = SubResource("WorldBoundaryShape2D_0xm2m")
+
+[node name="Area2D" parent="Scene" unique_id=1668755056 instance=ExtResource("4_1bvp3")]
+position = Vector2(285, 171)
