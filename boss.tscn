@@ -6,14 +6,15 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_0bnu1"]
 radius = 47.010635
 
-[node name="Area2D" type="Area2D" unique_id=1668755056]
+[node name="Area2D" type="Area2D" unique_id=1668755056 groups=["enemy"]]
 script = ExtResource("1_6xxrv")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1450152600]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1450152600 groups=["enemy"]]
 scale = Vector2(0.11710794, 0.11710794)
 texture = ExtResource("1_0bnu1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2104612416]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2104612416 groups=["enemy"]]
 shape = SubResource("CircleShape2D_0bnu1")
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

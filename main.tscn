@@ -36,6 +36,8 @@ region_rect = Rect2(283.6784, 7.0312424, 455.62805, 495.4516)
 [node name="Player" parent="Scene" unique_id=260596206 instance=ExtResource("2_0xm2m")]
 position = Vector2(285, 564)
 scale = Vector2(1.2800001, 1.2806324)
+heart = 3
+move_speed = 500.0
 
 [node name="Boundary" type="Node2D" parent="Scene" unique_id=2107469164]
 position = Vector2(551, 304)

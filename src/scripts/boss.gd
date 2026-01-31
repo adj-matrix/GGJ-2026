@@ -1,6 +1,7 @@
 extends Area2D
 
 
+@export var hp: float = 1000
 @export var float_speed: float = 2.0    # 浮动的速度
 @export var float_amplitude: float = 10.0 # 浮动的高度（像素）
 var initial_y: float
@@ -20,3 +21,15 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
 		body.hit()
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("bullet"):
+		var damage_dealt = area.get("damage")
+		if damage_dealt == null:
+			damage_dealt = 1.0
+		hp -= damage_dealt
+		area.queue_free()
+
+		if hp <= 0:
+			pass
