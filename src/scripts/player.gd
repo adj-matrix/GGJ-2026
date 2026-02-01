@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var heart: int = 3
+@export var spell: int = 3
 @export var move_speed: float = 500
 @export var move_speed_slow: float = 200
 @export var fire_speed: float = 0.05
@@ -11,6 +12,7 @@ extends CharacterBody2D
 var initial_position: Vector2
 var is_slow: bool = false
 var is_invincible: bool = false
+var is_gameover: bool = false
 var can_fire: bool = true
 
 @onready var sprite = $Sprite2D
@@ -28,11 +30,12 @@ func _physics_process(_delta: float) -> void:
 	else:
 		is_slow = false
 	velocity = input_dir * current_speed
-	move_and_slide()
+	if not is_gameover:
+		move_and_slide()
 
-	if Input.is_action_pressed("fire"):
+	if Input.is_action_pressed("fire") and not is_gameover:
 		fire()
-	if Input.is_action_just_pressed("bomb"):
+	if Input.is_action_just_pressed("bomb") and not is_gameover:
 		bomb()
 
 func hit() -> void:
@@ -45,8 +48,7 @@ func hit() -> void:
 	# 播放中弹反馈 TODO: Sound
 
 	if heart <= 0:
-		await get_tree().create_timer(0.25).timeout
-		get_tree().call_deferred("reload_current_scene")
+		gameover()
 	else:
 		position = initial_position
 		modulate = default_color
@@ -96,5 +98,15 @@ func fire() -> void:
 	can_fire = true
 
 func bomb() -> void:
-	# 这里写释放大招的逻辑
-	pass
+	if spell > 0 and not is_gameover:
+		spell -= 1
+		# 这里写清屏/无敌逻辑
+		# TODO: 播放音效，全屏伤害
+
+func gameover() -> void:
+	if not is_gameover:
+		is_gameover = true
+
+		get_tree().current_scene.show_gameover()
+		await get_tree().create_timer(3).timeout
+		get_tree().call_deferred("reload_current_scene")

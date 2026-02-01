@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dlmjx7hrleykv"]
 
 [ext_resource type="Texture2D" uid="uid://ivqtsm4g0ao" path="res://assets/images/touhou_panel.jpg" id="1_h2yge"]
+[ext_resource type="Script" uid="uid://b4eo7ci80u5wy" path="res://src/scripts/game_manager.gd" id="1_lquwl"]
 [ext_resource type="PackedScene" uid="uid://beu7y0kylkeo" path="res://player.tscn" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://bg3hwd0c7a2x8" path="res://assets/images/_shrine_4.jpg" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://cnpsyn777tage" path="res://boss.tscn" id="4_1bvp3"]
@@ -8,7 +9,14 @@
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
 distance = -239.72533
 
-[node name="Main" type="Node2D" unique_id=1407308507]
+[node name="Main" type="Node2D" unique_id=1407308507 node_paths=PackedStringArray("player", "score_label", "heart_label", "bomb_label", "gaze_label", "gameover_label")]
+script = ExtResource("1_lquwl")
+player = NodePath("Scene/Player")
+score_label = NodePath("CanvasLayer/ScoreLabel")
+heart_label = NodePath("CanvasLayer/HeartLabel")
+bomb_label = NodePath("CanvasLayer/BombLabel")
+gaze_label = NodePath("CanvasLayer/GazeLabel")
+gameover_label = NodePath("CanvasLayer/GameOverLabel")
 
 [node name="PanelUI" type="Sprite2D" parent="." unique_id=1661119068]
 modulate = Color(0.45013577, 0.45013577, 0.45013577, 1)
@@ -36,8 +44,6 @@ region_rect = Rect2(283.6784, 7.0312424, 455.62805, 495.4516)
 [node name="Player" parent="Scene" unique_id=260596206 instance=ExtResource("2_0xm2m")]
 position = Vector2(285, 564)
 scale = Vector2(1.2800001, 1.2806324)
-heart = 3
-move_speed = 500.0
 
 [node name="Boundary" type="Node2D" parent="Scene" unique_id=2107469164]
 position = Vector2(551, 304)
@@ -70,5 +76,72 @@ position = Vector2(-241.40623, 69.49691)
 rotation = -1.5707964
 shape = SubResource("WorldBoundaryShape2D_0xm2m")
 
-[node name="Area2D" parent="Scene" unique_id=1668755056 instance=ExtResource("4_1bvp3")]
+[node name="Boss" parent="Scene" unique_id=1668755056 node_paths=PackedStringArray("player") instance=ExtResource("4_1bvp3")]
 position = Vector2(285, 171)
+player = NodePath("../Player")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=81689679]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1526693565]
+offset_left = 752.0
+offset_top = 28.0
+offset_right = 1055.0
+offset_bottom = 111.0
+theme_override_colors/font_outline_color = Color(0.27058825, 0, 0.44313726, 1)
+theme_override_constants/outline_size = 40
+theme_override_font_sizes/font_size = 48
+text = "GGJ EXTRA"
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=24022305]
+offset_left = 766.0
+offset_top = 115.0
+offset_right = 1009.0
+offset_bottom = 182.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "Score: "
+
+[node name="HeartLabel" type="Label" parent="CanvasLayer" unique_id=1562168815]
+offset_left = 767.0
+offset_top = 172.0
+offset_right = 1010.0
+offset_bottom = 239.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "Player:"
+
+[node name="BombLabel" type="Label" parent="CanvasLayer" unique_id=679867437]
+offset_left = 765.0
+offset_top = 225.0
+offset_right = 1008.0
+offset_bottom = 292.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "Spell: "
+
+[node name="GazeLabel" type="Label" parent="CanvasLayer" unique_id=1499291227]
+offset_left = 765.0
+offset_top = 283.0
+offset_right = 1008.0
+offset_bottom = 350.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "Gaze: "
+
+[node name="GameOverLabel" type="Label" parent="CanvasLayer" unique_id=312733181]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.5
+offset_top = -33.5
+offset_right = 144.5
+offset_bottom = 33.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.35686275, 0, 0, 1)
+theme_override_constants/outline_size = 60
+theme_override_font_sizes/font_size = 120
+text = "GAME OVER!"
