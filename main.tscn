@@ -145,3 +145,11 @@ theme_override_colors/font_outline_color = Color(0.35686275, 0, 0, 1)
 theme_override_constants/outline_size = 60
 theme_override_font_sizes/font_size = 120
 text = "GAME OVER!"
+
+[node name="Label2" type="Label" parent="CanvasLayer" unique_id=1738649423]
+offset_left = 758.0
+offset_top = 599.0
+offset_right = 971.0
+offset_bottom = 630.0
+theme_override_font_sizes/font_size = 20
+text = "Shift Z X          ← ↓ ↑ →"
