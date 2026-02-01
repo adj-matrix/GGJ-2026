@@ -9,7 +9,7 @@
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
 distance = -239.72533
 
-[node name="Main" type="Node2D" unique_id=1407308507 node_paths=PackedStringArray("player", "score_label", "heart_label", "bomb_label", "gaze_label", "gameover_label")]
+[node name="Main" type="Node2D" unique_id=1407308507 node_paths=PackedStringArray("player", "score_label", "heart_label", "bomb_label", "gaze_label", "gameover_label", "victory_label")]
 script = ExtResource("1_lquwl")
 player = NodePath("Scene/Player")
 score_label = NodePath("CanvasLayer/ScoreLabel")
@@ -17,6 +17,7 @@ heart_label = NodePath("CanvasLayer/HeartLabel")
 bomb_label = NodePath("CanvasLayer/BombLabel")
 gaze_label = NodePath("CanvasLayer/GazeLabel")
 gameover_label = NodePath("CanvasLayer/GameOverLabel")
+victory_label = NodePath("CanvasLayer/VictoryLabel")
 
 [node name="PanelUI" type="Sprite2D" parent="." unique_id=1661119068]
 modulate = Color(0.45013577, 0.45013577, 0.45013577, 1)
@@ -145,6 +146,25 @@ theme_override_colors/font_outline_color = Color(0.35686275, 0, 0, 1)
 theme_override_constants/outline_size = 60
 theme_override_font_sizes/font_size = 120
 text = "GAME OVER!"
+
+[node name="VictoryLabel" type="Label" parent="CanvasLayer" unique_id=1984335073]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.5
+offset_top = -33.5
+offset_right = 144.5
+offset_bottom = 33.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_outline_color = Color(0.35686275, 0, 0, 1)
+theme_override_constants/outline_size = 60
+theme_override_font_sizes/font_size = 120
+text = "Victory!"
 
 [node name="Label2" type="Label" parent="CanvasLayer" unique_id=1738649423]
 offset_left = 758.0

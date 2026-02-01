@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var fire_speed: float = 0.05
 @export var bomb_damage: float = 100.0
 @export var bomb_duration: float = 2.0
+@export var collection_line_y: float = 200
 @export var bullet_basic_scene: PackedScene = preload("res://bullet_basic.tscn")
 @export var bullet_fast_scene: PackedScene = preload("res://bullet_fast.tscn")
 @export var bullet_slow_scene: PackedScene = preload("res://bullet_slow.tscn")
@@ -37,6 +38,7 @@ func _physics_process(_delta: float) -> void:
 	velocity = input_dir * current_speed
 	if not is_gameover:
 		move_and_slide()
+		check_point_collection()
 
 	if is_dying:
 		deathbomb_timer -= _delta
@@ -169,3 +171,14 @@ func flash_screen_effect() -> void:
 	var tween = create_tween()
 	tween.tween_property(flash, "modulate:a", 0.0, 0.5) # 0.5秒内透明度变0
 	tween.tween_callback(flash.queue_free) # 动画结束后删除节点
+
+func check_point_collection() -> void:
+	# 如果 Y 坐标小于设定值 (说明在屏幕上方)
+	if position.y < collection_line_y:
+		# 获取所有属于 "point_item" 组的节点
+		var items = get_tree().get_nodes_in_group("point_item")
+		for item in items:
+			# 调用道具身上的 magnet_to 方法
+			# 加上判断防止重复调用 (虽然 point_item 那边覆盖也没事)
+			if item.has_method("magnet_to") and not item.is_collected:
+				item.magnet_to(self)
