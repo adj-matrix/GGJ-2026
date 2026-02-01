@@ -50,6 +50,7 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("bomb") and not is_gameover:
 		if is_dying and spell > 0:
 			is_dying = false
+			AudioManager.play_hit()
 			bomb()
 		elif not is_dying:
 			bomb()
@@ -71,8 +72,7 @@ func actually_die() -> void:
 	heart -= 1
 	spell = 3
 	is_invincible = true
-
-	# 播放 Pichu~ 音效 TODO
+	AudioManager.play_pichu()
 
 	if heart <= 0:
 		gameover()
@@ -118,7 +118,6 @@ func fire() -> void:
 		get_tree().current_scene.add_child(b_fast_left)
 		get_tree().current_scene.add_child(b_fast_right)
 
-	# 播放射击音效 TODO: Sound
 	# 启动冷却计时器
 	await get_tree().create_timer(fire_speed).timeout
 	can_fire = true
@@ -142,8 +141,8 @@ func bomb() -> void:
 				e.hp -= bomb_damage
 		# 4. 视觉特效：屏幕闪白 (梦想封印！)
 		flash_screen_effect()
-		# 5. 音效 TODO: 播放一个巨大的爆炸声
-		
+		# 5. 播放一个巨大的爆炸声
+		AudioManager.play_bomb()
 		# 6. 处理无敌时间结束
 		# 创建一个计时器，等时间到了再恢复
 		await get_tree().create_timer(bomb_duration).timeout

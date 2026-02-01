@@ -18,6 +18,7 @@ func _ready() -> void:
 	var boss = get_tree().get_first_node_in_group("enemy")
 	if boss:
 		boss.defeated.connect(show_victory)
+	AudioManager.play_bgm_final()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -45,8 +46,8 @@ func show_victory() -> void:
 	if victory_label:
 		victory_label.text = "STAGE CLEAR!!\nScore: " + str(score)
 		victory_label.visible = true
-	# 4. 停止 Boss 战背景音乐，放个胜利音效（如果有）
-
+	# 4. 停止 Boss 战背景音乐
+	# AudioManager.stop_bgm()
 	# 5. 等待几秒返回主菜单或重启
 	await get_tree().create_timer(5.0).timeout
-	get_tree().change_scene_to_file("res://src/scenes/Title.tscn") # 假设你有标题场景
+	# get_tree().change_scene_to_file("res://src/scenes/Title.tscn")

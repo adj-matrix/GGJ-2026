@@ -20,12 +20,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		# 自由落体模式
 		velocity.y += gravity_speed * delta
-		
 		# 空气阻力（让横向速度慢慢变慢，直上直下更好接）
 		velocity.x = move_toward(velocity.x, 0, 100 * delta)
-		
 		position += velocity * delta
-		
 		# 掉出屏幕销毁
 		if position.y > 800:
 			queue_free()
@@ -43,7 +40,7 @@ func collect() -> void:
 	if gm and gm.has_method("add_score"):
 		gm.add_score(score_value)
 	
-	# TODO: 播放一个“叮”的音效
+	AudioManager.play_item()
 	queue_free()
 
 func magnet_to(player_node: Node2D) -> void:

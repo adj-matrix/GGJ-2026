@@ -78,6 +78,7 @@ func check_phase() -> void:
 		current_state = new_state
 		# 重置一下开火计时器，给玩家一点喘息时间
 		fire_timer = 1.0
+		AudioManager.play_boss_shot()
 
 func attack_pattern() -> void:
 	match current_state:
